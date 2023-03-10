@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>類似名検索</title>
+</head>
+<body>
+    <h1>類似名検索</h1>
+    <form action="/similarity" method="post">
+        <label for="name">名前：</label>
+        <input type="text" name="name" id="name">
+        <button type="submit">解析</button>
+    </form>
+    <br>
+    {% if similar_names %}
+        <p>「{{ input_name }}」に類似する名前：</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>名前</th>
+                    <th>Levenshtein距離</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in range(len(similar_names)) %}
+                    <tr>
+                        <td>{{ similar_names[i] }}</td>
+                        <td>{{ distance_values[i] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>類似する名前はありません。</p>
+    {% endif %}
+</body>
+</html>
+
