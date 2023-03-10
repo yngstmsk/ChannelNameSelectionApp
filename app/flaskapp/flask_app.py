@@ -1,11 +1,10 @@
 #-*- coding: utf-8 -*-
 from flask import Flask, render_template, request
-#import Flask
 import pandas as pd
 from janome.tokenizer import Tokenizer
 from Levenshtein import distance
 
-app = Flask('flask_app')
+app = Flask(__name__)
 
 # csvƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚İ
 df = pd.read_csv('/data/dic1.csv', header=None)
@@ -46,4 +45,4 @@ def similarity():
     return render_template('similarity.html', input_name=input_name, similar_names=similar_names)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
